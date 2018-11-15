@@ -8,6 +8,7 @@
 
 #import "NJF_NavigationController.h"
 #import "NJF_MacroDefinition.h"
+#import "UIBarButtonItem+NJF_Extension.h"
 
 @interface NJF_NavigationController ()
 
@@ -39,6 +40,9 @@
 {
     if (self.childViewControllers.count > 0) {
         viewController.hidesBottomBarWhenPushed = YES;
+        if (![viewController isKindOfClass:NSClassFromString(@"NJF_HomeWKWebController")]) {
+            viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithNormalImg:@"nav_btn_back_white" HighlightedImg:@"" target:self action:@selector(back)];
+        }
     }
     //这句super的push要放在后面, 让viewController可以覆盖上面设置的leftBarButtonItem
     [super pushViewController:viewController animated:animated];
